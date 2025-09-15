@@ -11,7 +11,7 @@ import SwiftUI
 struct fottowApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginScreen()
         }
     }
 }
