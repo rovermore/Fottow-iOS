@@ -206,36 +206,6 @@
             endingLineNumber = "25"
             landmarkName = "login(userName:password:fcm:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BAF7DEB9-38D1-457A-BEA3-2C9A01877F5C - a8c1b862fb4d28dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;fottow.LoginResponse, Swift.Error&gt;) -&gt; () in fottow.LoginViewModel.login(userName: Swift.String, password: Swift.String, fcm: Swift.String) -&gt; ()"
-                  moduleName = "fottow.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roberto/Documents/ios/fottow/fottow/presentation/login/LoginViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24">
-               </Location>
-               <Location
-                  uuid = "BAF7DEB9-38D1-457A-BEA3-2C9A01877F5C - a8c1b862fb4d2832"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;fottow.LoginResponse, Swift.Error&gt;) -&gt; () in fottow.LoginViewModel.login(userName: Swift.String, password: Swift.String, fcm: Swift.String) -&gt; ()"
-                  moduleName = "fottow.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roberto/Documents/ios/fottow/fottow/presentation/login/LoginViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

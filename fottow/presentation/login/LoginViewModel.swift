@@ -8,7 +8,7 @@ import SwiftUI
 
 @Observable
 final class LoginViewModel {
-    var repository = UserRepository()
+    let repository: UserRepository
     
     init(repository: UserRepository = UserRepository()) {
         self.repository = repository
