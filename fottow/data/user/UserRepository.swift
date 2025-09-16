@@ -9,6 +9,8 @@ import Foundation
 
 class UserRepository {
     
+    let TOKEN_KEY = "TOKEN_KEY"
+    
     func login(userName: String, password: String, fcm: String) async throws -> LoginResponse {
         
         print("1. Preparando la URL y la Request...")
@@ -22,7 +24,7 @@ class UserRepository {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         print("2. Creando el cuerpo de la petición (JSON)...")
-        let loginData = LoginRequest(username: userName, password: password, fcm: fcm)
+        let loginData = LoginRequest(userName: userName, password: password, fcm: fcm)
         let jsonData = try JSONEncoder().encode(loginData)
         request.httpBody = jsonData
         print("Cuerpo de la petición: \(String(data: jsonData, encoding: .utf8) ?? "(no se pudo convertir al string)")")
@@ -45,6 +47,8 @@ class UserRepository {
         
         print("5. Código de respuesta exitoso (\(httpResponse.statusCode)). Decodificando los datos...")
         let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+        
+        UserDefaults.standard.set(loginResponse.token, forKey: TOKEN_KEY)
         
         print("6. Decodificación exitosa. Login completado.")
         return loginResponse

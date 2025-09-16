@@ -25,7 +25,13 @@ struct LoginResponse: Codable {
 }
 
 struct LoginRequest: Codable {
-    let username: String
+    let userName: String
     let password: String
     let fcm: String
+    
+    private enum CodingKeys: String, CodingKey {
+            case userName = "username" // Mapea la clave JSON "username" a la propiedad userName
+            case password
+            case fcm
+        }
 }

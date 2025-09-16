@@ -45,9 +45,22 @@ struct LoginScreen: View {
                     Text("Crear cuenta")
                         .bold()
                 }
+            
                 
             }
             .padding()
+            .navigationDestination(isPresented: $viewModel.isLoggedIn) {
+                GalleryScreen()
+            }
+            .alert("Error",
+                   isPresented: $viewModel.showError,
+                   actions: {
+                       Button("OK", role: .cancel) { }
+                   },
+                   message: {
+                       Text(viewModel.errorMessage ?? "Error desconocido")
+                   }
+            )
             
         }
     }

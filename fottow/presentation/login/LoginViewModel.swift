@@ -10,6 +10,10 @@ import SwiftUI
 final class LoginViewModel {
     let repository: UserRepository
     
+    var isLoggedIn: Bool = false
+    var showError: Bool = false
+    var errorMessage: String?
+    
     init(repository: UserRepository = UserRepository()) {
         self.repository = repository
     }
@@ -22,12 +26,13 @@ final class LoginViewModel {
                 print("Token: \(String(describing: response.token))")
                 if let user = response.user {
                     print("Usuario: \(user.userName)")
+                    self.isLoggedIn = true
                 }
-                // Aquí puedes actualizar propiedades `@Published` para refrescar la UI
                 } catch {
-                    // Se ejecuta si hay un error (red, decodificación, etc.)
                     print("Error en el login: \(error.localizedDescription)")
-                    // Aquí puedes actualizar una propiedad para mostrar un mensaje de error en la UI
+                    self.showError = true
+                    self.errorMessage = error.localizedDescription
+                    self.isLoggedIn = false
                 }
             }
     }
