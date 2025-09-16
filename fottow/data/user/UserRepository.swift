@@ -8,17 +8,15 @@
 import Foundation
 
 class UserRepository {
-    
-    let TOKEN_KEY = "TOKEN_KEY"
-    
+        
     func login(userName: String, password: String, fcm: String) async throws -> LoginResponse {
         
-        print("1. Preparando la URL y la Request...")
-        guard let url = URL(string: "https://api-dev.fottow.com/auth/login") else {
+        print("1. Preparando la URL y la Request del LOGIN...")
+        guard let url = URL(string: FOTTOW_URL + LOGIN_ENDPOINT) else {
             print("Error: URL inválida.")
             throw URLError(.badURL)
         }
-        
+                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -30,18 +28,18 @@ class UserRepository {
         print("Cuerpo de la petición: \(String(data: jsonData, encoding: .utf8) ?? "(no se pudo convertir al string)")")
         
         
-        print("3. Enviando la petición a la API...")
+        print("3. Enviando la petición de LOGIN a la API...")
         let (data, response) = try await URLSession.shared.data(for: request)
         
         print("4. Petición recibida. Verificando el código de respuesta HTTP...")
         guard let httpResponse = response as? HTTPURLResponse else {
-            print("Error: La respuesta no es una respuesta HTTP.")
+            print("ErrorLogin: La respuesta no es una respuesta HTTP.")
             throw URLError(.badServerResponse)
         }
         
         // Aquí es donde se maneja el error -1011 (NSURLErrorBadServerResponse)
         guard (200...299).contains(httpResponse.statusCode) else {
-            print("Error: Código de estado HTTP no exitoso -> \(httpResponse.statusCode)")
+            print("ErrorLogin: Código de estado HTTP no exitoso -> \(httpResponse.statusCode)")
             throw URLError(.badServerResponse) // Lanza el error capturado por el ViewModel
         }
         
