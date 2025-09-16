@@ -19,13 +19,14 @@ struct SplashScreen: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black)
-            .navigationDestination(isPresented: $viewModel.isUserLogged) {
-                if viewModel.isUserLogged {
-                    GalleryScreen()
-                } else {
-                    LoginScreen()
-                }
-            }
+            .fullScreenCover(isPresented: .constant(viewModel.appState == .loggedIn || viewModel.appState == .loggedOut)) {
+                        switch viewModel.appState {
+                        case .loggedIn:
+                            MainTabScreen()
+                        case .loggedOut:
+                            LoginScreen()
+                        }
+                    }
         }
     }
 }

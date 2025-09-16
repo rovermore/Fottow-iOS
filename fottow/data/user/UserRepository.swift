@@ -47,12 +47,42 @@ class UserRepository {
         let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
         
         UserDefaults.standard.set(loginResponse.token, forKey: TOKEN_KEY)
+        do {
+            // 1. Codifica el objeto User a Data
+            let userData = try JSONEncoder().encode(loginResponse.user)
+            
+            // 2. Guarda el Data en UserDefaults
+            UserDefaults.standard.set(userData, forKey: USER_KEY)
+            
+            print("Usuario guardado correctamente.")
+            
+        } catch {
+            print("Error al codificar el usuario para guardar: \(error)")
+        }
         
         print("6. Decodificación exitosa. Login completado.")
         return loginResponse
     }
     
     func isUserLoggedIn() -> Bool {
-        return UserDefaults.standard.string(forKey: TOKEN_KEY) != nil && !UserDefaults.standard.string(forKey: TOKEN_KEY)!.isEmpty
+        let isUseLogged = UserDefaults.standard.string(forKey: TOKEN_KEY) != nil && !UserDefaults.standard.string(forKey: TOKEN_KEY)!.isEmpty
+        print("isUseLogged: \(isUseLogged)")
+        return isUseLogged
+    }
+    
+    func getUser() -> User? {
+        // 1. Obtén el Data de UserDefaults
+        guard let userData = UserDefaults.standard.data(forKey: USER_KEY) else {
+            return nil // No se encontró el usuario
+        }
+        
+        do {
+            // 2. Decodifica el Data a un objeto User
+            let user = try JSONDecoder().decode(User.self, from: userData)
+            return user
+        } catch {
+            print("Error al decodificar el usuario: \(error)")
+            return nil // Fallo en la decodificación
+        }
     }
 }

@@ -34,7 +34,7 @@ struct GalleryScreen: View {
                                 image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: itemSize, height: itemSize) // Asegura que la imagen tenga el mismo tamaño
+                                    .frame(width: itemSize, height: itemSize)
                                     .clipped()
                             case .failure:
                                 ProgressView()
@@ -51,6 +51,7 @@ struct GalleryScreen: View {
         .onAppear {
             viewModel.getPhotos()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

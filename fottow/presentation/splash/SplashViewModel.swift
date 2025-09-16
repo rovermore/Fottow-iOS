@@ -13,8 +13,7 @@ final class SplashViewModel {
     
     let repository: UserRepository
     
-    // Esta propiedad ahora es observable
-    var isUserLogged: Bool = false
+    var appState: AppState = .loggedOut
     
     init(repository: UserRepository = UserRepository()) {
         self.repository = repository
@@ -22,6 +21,15 @@ final class SplashViewModel {
     }
     
     func checkLogin() {
-        self.isUserLogged = repository.isUserLoggedIn()
+        if repository.isUserLoggedIn() {
+                    self.appState = .loggedIn
+                } else {
+                    self.appState = .loggedOut
+                }
     }
+}
+
+enum AppState {
+    case loggedIn
+    case loggedOut
 }

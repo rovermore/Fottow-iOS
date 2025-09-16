@@ -50,7 +50,7 @@ struct LoginScreen: View {
             }
             .padding()
             .navigationDestination(isPresented: $viewModel.isLoggedIn) {
-                GalleryScreen()
+                MainTabScreen()
             }
             .alert("Error",
                    isPresented: $viewModel.showError,
