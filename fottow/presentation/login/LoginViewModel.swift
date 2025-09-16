@@ -15,15 +15,20 @@ final class LoginViewModel {
     }
 
     func login(userName: String, password: String, fcm: String){
-        repository.login(userName: userName, password: password, fcm: fcm) { result in
-            switch result {
-            case .success(let response):
-                print("Token: \(response.token)")
-                guard let user = response.user else { return }
-                print("Usuario: \(user.userName)")
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+        Task { @MainActor in
+            do {
+                let response = try await repository.login(userName: userName, password: password, fcm: fcm)
+                // Se ejecuta si la llamada es exitosa
+                print("Token: \(String(describing: response.token))")
+                if let user = response.user {
+                    print("Usuario: \(user.userName)")
+                }
+                // Aquí puedes actualizar propiedades `@Published` para refrescar la UI
+                } catch {
+                    // Se ejecuta si hay un error (red, decodificación, etc.)
+                    print("Error en el login: \(error.localizedDescription)")
+                    // Aquí puedes actualizar una propiedad para mostrar un mensaje de error en la UI
+                }
             }
-        }
     }
 }
