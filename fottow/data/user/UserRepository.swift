@@ -51,4 +51,8 @@ class UserRepository {
         print("6. Decodificación exitosa. Login completado.")
         return loginResponse
     }
+    
+    func isUserLoggedIn() -> Bool {
+        return UserDefaults.standard.string(forKey: TOKEN_KEY) != nil && !UserDefaults.standard.string(forKey: TOKEN_KEY)!.isEmpty
+    }
 }
