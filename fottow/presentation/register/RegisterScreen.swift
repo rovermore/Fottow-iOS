@@ -25,7 +25,7 @@ struct RegisterScreen: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                TextField("Nombre", text: $email)
+                TextField("Nombre", text: $name)
                     .frame(maxWidth: .infinity, minHeight:40)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.emailAddress)
@@ -44,7 +44,9 @@ struct RegisterScreen: View {
                     .textFieldStyle(.roundedBorder)
                     .autocorrectionDisabled(true)
                 
-                PrimaryButton(text: "Crear cuenta") { }
+                PrimaryButton(text: "Crear cuenta") {
+                    viewModel.register(userName: email, password: password, nickname: name)
+                }
                 
             }
             .padding()

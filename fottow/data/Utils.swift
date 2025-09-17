@@ -9,7 +9,7 @@ let TOKEN_KEY = "TOKEN_KEY"
 
 let USER_KEY = "USER_KEY"
 
-let FOTTOW_URL = "https://api.fottow.com/"
+let FOTTOW_URL = "https://api-dev.fottow.com/"
 
 let LOGIN_ENDPOINT = "auth/login"
 

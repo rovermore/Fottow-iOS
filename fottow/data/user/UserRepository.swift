@@ -66,7 +66,7 @@ class UserRepository {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         print("2. Creando el cuerpo de la petición (JSON)...")
-        let registerData = RegisterRequest(userName: userName, password: password,nickName: nickname , fcm: "")
+        let registerData = RegisterRequest(userName: userName, password: password,nickName: nickname , fcm: "fakefcm")
         let jsonData = try JSONEncoder().encode(registerData)
         request.httpBody = jsonData
         print("Cuerpo de la petición: \(String(data: jsonData, encoding: .utf8) ?? "(no se pudo convertir al string)")")
