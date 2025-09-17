@@ -13,5 +13,7 @@ let FOTTOW_URL = "https://api.fottow.com/"
 
 let LOGIN_ENDPOINT = "auth/login"
 
+let REGISTER_ENDPOINT = "auth/signup"
+
 let PHOTOS_ENDPOINT = "images/images"
 

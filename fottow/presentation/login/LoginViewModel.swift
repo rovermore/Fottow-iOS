@@ -24,10 +24,9 @@ final class LoginViewModel {
                 let response = try await repository.login(userName: userName, password: password, fcm: fcm)
                 // Se ejecuta si la llamada es exitosa
                 print("Token: \(String(describing: response.token))")
-                if let user = response.user {
-                    print("Usuario: \(user.userName)")
-                    self.isLoggedIn = true
-                }
+                print("Usuario: \(response.user.userName)")
+                self.isLoggedIn = true
+                
                 } catch {
                     print("Error en el login: \(error.localizedDescription)")
                     self.showError = true
