@@ -48,15 +48,13 @@ struct UploadScreen: View {
         }.padding()
         .navigationBarTitle("Upload")
         .fullScreenCover(isPresented: $viewModel.isShowingCamera) {
-                    ImagePicker(selectedImage: $viewModel.capturedImage, sourceType: .camera)
-                }
+            ImagePicker(selectedImage: $viewModel.capturedImage, sourceType: .camera)
+        }
                 
         // Modal para la Galería (el nuevo selector)
         .sheet(isPresented: $isShowingGallery) {
-                    // 🚨 CAMBIO CLAVE: Usamos .photoLibrary como sourceType
-                    // Usamos .sheet para la galería, que es el estilo estándar de iOS
-                    ImagePicker(selectedImage: $viewModel.capturedImage, sourceType: .photoLibrary)
-                }
+            ImagePicker(selectedImage: $viewModel.capturedImage, sourceType: .photoLibrary)
+        }
     }
 }
 
