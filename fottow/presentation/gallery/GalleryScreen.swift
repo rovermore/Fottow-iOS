@@ -52,6 +52,7 @@ struct GalleryScreen: View {
             viewModel.getPhotos()
         }
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitle("Galería")
     }
 }
 

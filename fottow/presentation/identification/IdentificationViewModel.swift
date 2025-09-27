@@ -1,9 +1,17 @@
 //
-//  CameraViewModel.swift
+//  IdentificationViewModel.swift
 //  fottow
 //
 //  Created by Rober on 27/9/25.
 //
+
+//
+//  UploadViewModel.swift
+//  fottow
+//
+//  Created by Rober on 27/9/25.
+//
+
 import UIKit
 import Observation
 
@@ -23,7 +31,7 @@ class IdentificationViewModel {
         self.repository = repository
     }
     
-    func uploadPhoto() {
+    func uploadIdentificationImage() {
         guard let image = capturedImage else {
             print("Error: No hay imagen para subir.")
             return
@@ -34,10 +42,10 @@ class IdentificationViewModel {
             print("Error: No se pudo convertir la imagen a Data.")
             return
         }
-
+        
         self.isLoading = true
         self.uploadError = nil
-
+        
         Task { @MainActor in
             do {
                 let response = try await repository.uploadIdentificationSelfie(imageData: imageData)
@@ -51,5 +59,6 @@ class IdentificationViewModel {
                 print("Fallo al subir la imagen: \(error)")
             }
         }
+        
     }
 }

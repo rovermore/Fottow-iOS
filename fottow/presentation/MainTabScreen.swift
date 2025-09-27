@@ -22,6 +22,14 @@ struct MainTabScreen: View {
             
             // Segunda pestaña: Perfil del Usuario
             NavigationStack {
+                UploadScreen()
+            }
+            .tabItem {
+                Label("Subir", systemImage: "plus")
+            }
+            
+            // Segunda pestaña: Perfil del Usuario
+            NavigationStack {
                 ProfileScreen()
             }
             .tabItem {

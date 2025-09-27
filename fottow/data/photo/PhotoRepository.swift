@@ -87,4 +87,43 @@ class PhotoRepository {
         let uploadResponse = try JSONDecoder().decode(UploadPhotoResponse.self, from: data)
         return uploadResponse
     }
+    
+    func uploadImage(imageData: Data, filename: String = "photo.jpg") async throws -> UploadPhotoResponse {
+        
+        print("1. Preparando la URL y la Request...")
+        let url = URL(string: FOTTOW_URL + UPLOAD_IMAGE_ENDPOINT)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // Genera el Boundary (separador único para el formulario)
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        print("1. Crear el Body de la petición")
+        var body = Data()
+
+        print("2. Agregar la parte de la imagen")
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        // Content-Disposition indica que es un archivo con nombre "file" y nombre de archivo "photo.jpg"
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData) // Agrega los datos binarios de la imagen
+        body.append("\r\n".data(using: .utf8)!)
+
+        print("3. Finalizar el Body")
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        request.httpBody = body
+        
+        print("4. Realizar la llamada")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        // ... Manejo de la respuesta y decodificación ...
+        
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+        
+        // Asume que tienes un modelo 'UploadResponse'
+        let uploadResponse = try JSONDecoder().decode(UploadPhotoResponse.self, from: data)
+        return uploadResponse
+    }
 }

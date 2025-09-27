@@ -40,7 +40,7 @@ struct IdentificationScreen: View {
                             // Botón para subir la foto (solo si hay imagen)
                             if viewModel.capturedImage != nil {
                                 Button {
-                                    viewModel.uploadPhoto()
+                                    viewModel.uploadIdentificationImage()
                                 } label: {
                                     if viewModel.isLoading {
                                         ProgressView()
@@ -57,7 +57,7 @@ struct IdentificationScreen: View {
             }.padding()
         // Muestra el ImagePicker como una presentación modal
                 .fullScreenCover(isPresented: $viewModel.isShowingCamera) {
-                    ImagePicker(selectedImage: $viewModel.capturedImage)
+                    ImagePicker(selectedImage: $viewModel.capturedImage, sourceType: .camera)
                 }
                 // Muestra el error si existe
                 .alert("Error de Carga", isPresented: .constant(viewModel.uploadError != nil), actions: {

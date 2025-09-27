@@ -11,11 +11,14 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage? // 1. Imagen capturada por el usuario
     @Environment(\.dismiss) var dismiss // Para cerrar la cámara
     
+    // Este initializer nos permite elegir si abrimos la Cámara o la Galería
+        let sourceType: UIImagePickerController.SourceType
+    
     // Define el tipo de controlador de vista que estás envolviendo
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         // Configura el picker para usar la cámara
-        picker.sourceType = .camera
+        picker.sourceType = sourceType
         // Asigna el coordinador para manejar los eventos del delegado
         picker.delegate = context.coordinator
         return picker

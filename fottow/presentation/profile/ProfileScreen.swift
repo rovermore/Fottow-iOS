@@ -43,7 +43,8 @@ struct ProfileScreen: View {
         }
         .onAppear() {
             viewModel.getUser()
-        }        
+        }
+        .navigationBarTitle("Galería")
     }
 }
 
