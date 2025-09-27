@@ -14,3 +14,15 @@ struct Photo: Codable, Hashable {
 struct PhotoResponse: Codable {
     let images: [Photo]
 }
+
+struct UploadPhotoResponse: Codable {
+    let message: String
+    let imageUrl: String
+    let totalFaces: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case imageUrl = "image_url"
+        case message
+        case totalFaces = "total_faces"
+    }
+}

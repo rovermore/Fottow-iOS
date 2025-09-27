@@ -17,3 +17,5 @@ let REGISTER_ENDPOINT = "auth/signup"
 
 let PHOTOS_ENDPOINT = "images/images"
 
+let UPLOAD_IDENTIFICATION_ENDPOINT = "images/identify"
+
